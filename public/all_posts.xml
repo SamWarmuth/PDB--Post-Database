@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+  <channel>
+    <title>SamWarmuth.com QuickPosts</title>
+    <link>http://www.samwarmuth.com</link>
+    <description>Old news (or new olds)</description>
+    <item>
+      <title>Second Post</title>
+      <link>2</link>
+      <description>Does this actually work? no way.</description>
+      <pubDate>Tue, 01 Dec 2009 01:10:54 -0600</pubDate>
+      <dc:date>2009-12-01T01:10:54-06:00</dc:date>
+    </item>
+    <item>
+      <title>Super New Post</title>
+      <link>1</link>
+      <description>A basic structural design underlies every kind of writing programming. Writers Programmers will in part follow this design, in part deviate from it, according to their skills, their needs, and the unexpected events that accompany the act of composition. Writing Programming, to be effective, must follow closely the thoughts of the writer programmer, but not necessarily in the order in which those thoughts occur. This calls for a scheme of procedure....in most cases, planning must be a deliberate prelude to writing programming. The first principle of composition software development, therefore, is to foresee or determine the shape of what is to come and pursue that shape.</description>
+      <pubDate>Tue, 01 Dec 2009 01:04:30 -0600</pubDate>
+      <dc:date>2009-12-01T01:04:30-06:00</dc:date>
+    </item>
+  </channel>
+</rss>

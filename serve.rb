@@ -29,6 +29,10 @@ end
 get '/id/:id' do
 	haml :post
 end
+get '/delete/:id' do
+	post = Post.get(params[:id])
+	post.destroy!
+end
 post '/new' do
 	require_admin
 	return "Malformed Input. Or you just suck." if params[:title].nil?||params[:title]==''
@@ -80,6 +84,7 @@ __END__
 	%p
 		=post.title
 		=post.date
+		=post.link
 		%br
 		=post.description
 		
@@ -89,7 +94,7 @@ __END__
 	= post.title
 %p
 	= post.date
-	-- 
+	||
 	= post.description
-	--
+	||
 	= post.link

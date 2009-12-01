@@ -8,7 +8,7 @@ require 'haml'
 require 'lib/authorization'
 
 before do headers "Content-Type" => "text/html; charset=utf-8" end
-$posts = {}
+$posts = ''
 class Post
 	include DataMapper::Resource
 	property :id, Serial
@@ -22,6 +22,10 @@ get '/' do
 	refresh
 	haml :new
 end
+get '/posts.xml' do
+   content_type 'text/xml', :charset => 'utf-8'
+	return $posts
+end
 get '/id/:id' do
 	haml :post
 end
@@ -34,17 +38,16 @@ post '/new' do
 	redirect "http://www.samwarmuth.com"
 end
 def refresh
-	$posts = Post.all
-	return if $posts.length == 0
+	posts = Post.all
+	return if posts.length == 0
 	version = "2.0"
-	destination = "#{Dir.pwd}/public/all_posts.xml" # local file to write
-
+	
 	content = RSS::Maker.make(version) do |m|
 		m.channel.title = "SamWarmuth.com QuickPosts"
 		m.channel.link = "http://www.samwarmuth.com"
 		m.channel.description = "Old news (or new olds)"
 		m.items.do_sort = true # sort items by date
-		$posts.each do |post|
+		posts.each do |post|
 			i = m.items.new_item
 			i.title = post.title
 			i.description = post.description
@@ -52,9 +55,7 @@ def refresh
 			i.date = Time.parse(post.date.to_s)
 		end
 	end
-	File.open(destination,"w") do |f|
-		f.write(content)
-	end
+	$posts=content
 end
 helpers do
 	include Sinatra::Authorization

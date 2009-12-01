@@ -56,7 +56,9 @@ def refresh
 		f.write(content)
 	end
 end
-
+helpers do
+	include Sinatra::Authorization
+end
 __END__
 @@layout
 !!!

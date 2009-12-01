@@ -5,6 +5,7 @@ require 'rss/maker'
 require 'datamapper'
 require 'do_postgres'
 require 'haml'
+require 'lib/authorization'
 
 before do headers "Content-Type" => "text/html; charset=utf-8" end
 $posts = {}
@@ -21,7 +22,11 @@ get '/' do
 	refresh
 	haml :new
 end
+get '/id/:id'
+	haml :post
+end
 post '/new' do
+	require_admin
 	return "Malformed Input. Or you just suck." if params[:title].nil?||params[:title]==''
 	post = Post.new(:title => params[:title], :description => params[:description], :date => Time.now)
 	post.save
@@ -56,7 +61,7 @@ __END__
 @@layout
 !!!
 %head
-	%title Superman Comes Again?
+	%title Post DB
 %body
 	=yield
 	
@@ -74,3 +79,12 @@ __END__
 		=post.date
 		%br
 		=post.description
+		
+@@post
+-post = Post.get(params[:id])
+%h1
+	= post.title
+%p
+	= post.date
+	-- 
+	= post.description

@@ -33,7 +33,7 @@ get '/id/:id' do
 end
 get '/delete/:id' do
 	require_admin
-	post = Post.get(params[:id])
+	post = Post.get(params[:id].to_i)
 	post.destroy!
 	redirect 'http://www.samwarmuth.com/fresh'
 end

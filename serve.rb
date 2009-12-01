@@ -25,7 +25,7 @@ end
 get '/posts.xml' do
    content_type 'text/xml', :charset => 'utf-8'
 	return "ERROR:list Empty" if $posts == ''
-	return $posts
+	return $posts.to_s
 end
 get '/id/:id' do
 	haml :post

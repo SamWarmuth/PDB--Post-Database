@@ -22,7 +22,7 @@ get '/' do
 	refresh
 	haml :new
 end
-get '/id/:id'
+get '/id/:id' do
 	haml :post
 end
 post '/new' do

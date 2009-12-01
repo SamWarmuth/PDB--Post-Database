@@ -24,6 +24,7 @@ get '/' do
 end
 get '/posts.xml' do
    content_type 'text/xml', :charset => 'utf-8'
+	return "ERROR:list Empty" if $posts == ''
 	return $posts
 end
 get '/id/:id' do
@@ -32,6 +33,7 @@ end
 get '/delete/:id' do
 	post = Post.get(params[:id])
 	post.destroy!
+	redirect 'http://www.samwarmuth.com/fresh'
 end
 post '/new' do
 	require_admin
@@ -39,7 +41,7 @@ post '/new' do
 	post = Post.new(:title => params[:title], :description => params[:description], :date => Time.now)
 	post.save
 	refresh
-	redirect "http://www.samwarmuth.com"
+	redirect "http://www.samwarmuth.com/fresh"
 end
 def refresh
 	posts = Post.all

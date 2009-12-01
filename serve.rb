@@ -91,3 +91,5 @@ __END__
 	= post.date
 	-- 
 	= post.description
+	--
+	= post.link

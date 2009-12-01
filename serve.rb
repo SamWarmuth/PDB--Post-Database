@@ -84,7 +84,7 @@ __END__
 	%p
 		=post.title
 		=post.date
-		=post.link
+		="http://pdb.samwarmuth.com/id/"+post.id.to_s
 		%br
 		=post.description
 		
@@ -97,4 +97,4 @@ __END__
 	||
 	= post.description
 	||
-	= post.link
+	= "http://pdb.samwarmuth.com/id/"+post.id.to_s

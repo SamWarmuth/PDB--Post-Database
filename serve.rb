@@ -24,7 +24,8 @@ get '/' do
 end
 get '/posts.xml' do
    content_type 'text/xml', :charset => 'utf-8'
-	return "ERROR:list Empty" if $posts == ''
+	refresh if $posts == ''
+	return "ERROR" if $posts == ''
 	return $posts.to_s
 end
 get '/id/:id' do

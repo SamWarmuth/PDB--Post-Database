@@ -1,12 +1,11 @@
 require 'rubygems'
 require 'sinatra'
-require 'open-uri'
-require 'rss/maker'
 require 'datamapper'
 require 'do_postgres'
 require 'haml'
+require 'open-uri'
+require 'rss/maker'
 require 'lib/authorization'
-
 before do headers "Content-Type" => "text/html; charset=utf-8" end
 $posts = ''
 class Post
@@ -18,6 +17,7 @@ class Post
 end
 DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/dev.db")
 DataMapper.auto_upgrade!
+
 get '/' do
 	refresh
 	haml :new
@@ -32,6 +32,7 @@ get '/id/:id' do
 	haml :post
 end
 get '/delete/:id' do
+	require_admin
 	post = Post.get(params[:id])
 	post.destroy!
 	redirect 'http://www.samwarmuth.com/fresh'

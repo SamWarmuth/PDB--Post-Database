@@ -34,6 +34,7 @@ end
 get '/delete/:id' do
 	require_admin
 	Post.all(:id => params[:id].to_i).destroy!
+	refresh
 	redirect 'http://www.samwarmuth.com/fresh'
 end
 post '/new' do
@@ -55,7 +56,7 @@ def refresh
 		m.items.do_sort = true # sort items by date
 		posts.each do |post|
 			i = m.items.new_item
-			i.title = post.title
+			i.title = post.title + "<a href='http://pdb.samwarmuth.com/delete/"+post.id.to_s+"'>x</a>"
 			i.description = post.description
 			i.link = "http://pdb.samwarmuth.com/id/"+post.id.to_s
 			i.date = Time.parse(post.date.to_s)

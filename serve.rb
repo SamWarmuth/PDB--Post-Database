@@ -33,8 +33,7 @@ get '/id/:id' do
 end
 get '/delete/:id' do
 	require_admin
-	post = Post.get(params[:id].to_i)
-	post.destroy!
+	Post.all(:id => params[:id].to_i).destroy!
 	redirect 'http://www.samwarmuth.com/fresh'
 end
 post '/new' do
@@ -49,7 +48,6 @@ def refresh
 	posts = Post.all
 	return if posts.length == 0
 	version = "2.0"
-	
 	content = RSS::Maker.make(version) do |m|
 		m.channel.title = "SamWarmuth.com QuickPosts"
 		m.channel.link = "http://www.samwarmuth.com"
@@ -60,6 +58,7 @@ def refresh
 			i.title = post.title
 			i.description = post.description
 			i.link = "http://pdb.samwarmuth.com/id/"+post.id.to_s
+			i.guid = "http://pdb.samwarmuth.com/destroy/"+post.id.to_s
 			i.date = Time.parse(post.date.to_s)
 		end
 	end

@@ -58,7 +58,6 @@ def refresh
 			i.title = post.title
 			i.description = post.description
 			i.link = "http://pdb.samwarmuth.com/id/"+post.id.to_s
-			i.guid = "http://pdb.samwarmuth.com/destroy/"+post.id.to_s
 			i.date = Time.parse(post.date.to_s)
 		end
 	end
